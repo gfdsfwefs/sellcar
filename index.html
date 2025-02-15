@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Знайдіть свій ідеальний автомобіль</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Бічне меню -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>Меню</h2>
+            <button id="closeSidebar">✕</button>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item active">
+                <span class="icon">🏠</span>
+                Головна
+            </a>
+            <a href="about.html" class="nav-item">
+                <span class="icon">📰</span>
+                Про нас
+            </a>
+            <a href="contact.html" class="nav-item">
+                <span class="icon">💬</span>
+                Повідомлення
+            </a>
+            <a href="#" class="nav-item">
+                <span class="icon">📝</span>
+                Продати авто
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Основний контент -->
+    <div class="main-content">
+        <header class="header">
+            <button id="menuToggle" class="menu-toggle">☰</button>
+            <div class="auth-buttons">
+                <button class="theme-toggle" id="themeToggle" title="Змінити тему">🌙</button>
+                <a href="sing.html" class="sign-in">Увійти</a>
+                <a href="register.html" class="sign-up">Зареєструватися</a>
+            </div>
+        </header>
+
+        <section class="search-section">
+            <h1>Знайдіть свій ідеальний автомобіль</h1>
+            <div class="search-bar">
+                <input type="text" class="search-input" id="carSearchInput" placeholder="Пошук автомобілів...">
+                <button class="search-button" onclick="performSearch()">Пошук</button>
+            </div>
+            <!-- Фільтри -->
+            <div class="filters">
+                <select class="filter-select" id="brandFilter">
+                    <option value="">Марка</option>
+                    <option value="bmw">BMW</option>
+                    <option value="mercedes">Mercedes-Benz</option>
+                    <option value="audi">Audi</option>
+                </select>
+                <select class="filter-select" id="yearFilter">
+                    <option value="">Рік випуску</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                </select>
+                <select class="filter-select" id="priceFilter">
+                    <option value="">Ціна</option>
+                    <option value="low">До $30,000</option>
+                    <option value="medium">$30,000 - $60,000</option>
+                    <option value="high">Від $60,000</option>
+                </select>
+            </div>
+        </section>
+        
+        <div id="resultSection">
+            <!-- Тут буде виводитися результат пошуку -->
+        </div>
+        
+        <script>
+            // Тестові дані автомобілів
+            const cars = [
+                { brand: 'bmw', model: 'X5', year: '2023', price: 50000 },
+                { brand: 'mercedes', model: 'S-Class', year: '2022', price: 70000 },
+                { brand: 'audi', model: 'Q7', year: '2021', price: 45000 },
+                { brand: 'bmw', model: 'M3', year: '2021', price: 60000 },
+                { brand: 'mercedes', model: 'E-Class', year: '2023', price: 80000 }
+            ];
+        
+            // Функція для виконання пошуку
+            function performSearch() {
+                // Отримуємо значення з полів
+                const searchInput = document.getElementById('carSearchInput').value.toLowerCase();
+                const brand = document.getElementById('brandFilter').value;
+                const year = document.getElementById('yearFilter').value;
+                const price = document.getElementById('priceFilter').value;
+        
+                // Фільтруємо автомобілі
+                let filteredCars = cars.filter(car => {
+                    let matches = true;
+        
+                    // Перевірка за маркою
+                    if (brand && car.brand !== brand) {
+                        matches = false;
+                    }
+        
+                    // Перевірка за роком випуску
+                    if (year && car.year !== year) {
+                        matches = false;
+                    }
+        
+                    // Перевірка за ціною
+                    if (price === 'low' && car.price > 30000) {
+                        matches = false;
+                    } else if (price === 'medium' && (car.price < 30000 || car.price > 60000)) {
+                        matches = false;
+                    } else if (price === 'high' && car.price < 60000) {
+                        matches = false;
+                    }
+        
+                    // Перевірка за введеним текстом у пошуковому полі
+                    if (searchInput && !car.model.toLowerCase().includes(searchInput)) {
+                        matches = false;
+                    }
+        
+                    return matches;
+                });
+        
+                // Виведення результатів
+                displayResults(filteredCars);
+            }
+        
+            // Функція для відображення результатів
+            function displayResults(cars) {
+                const resultSection = document.getElementById('resultSection');
+                resultSection.innerHTML = '';  // Очищаємо старі результати
+        
+                if (cars.length === 0) {
+                    resultSection.innerHTML = '<p>Нічого не знайдено</p>';
+                } else {
+                    cars.forEach(car => {
+                        const carElement = document.createElement('div');
+                        carElement.classList.add('car-result');
+                        carElement.innerHTML = `
+                            <p>Марка: ${car.brand.toUpperCase()}</p>
+                            <p>Модель: ${car.model}</p>
+                            <p>Рік випуску: ${car.year}</p>
+                            <p>Ціна: $${car.price}</p>
+                        `;
+                        resultSection.appendChild(carElement);
+                    });
+                }
+            }
+        </script>
+        
+
+        <div class="car-grid">
+            
+                <div class="car-card" data-car-id="1">
+                    <img src="img_cars/911.jpg" alt="Porsche 911">
+                    <h2>Porsche 911</h2>
+                    <p>Спортивний автомобіль з потужним двигуном та відмінною керованістю.</p>
+                    <div class="car-details">
+                        <h3>Porsche 911</h3>
+                        <div class="car-info">
+                            <span class="car-year">2023</span>
+                            <span class="car-price">$120,000</span>
+                        </div>
+                        <div class="car-location">
+                            📍 Львів, Україна
+                        </div>
+                        <button class="details-btn">Детальніше</button>
+                    </div>
+                </div>
+                
+                <div class="car-card" data-car-id="2">
+                    <img src="img_cars/bmw.jpg" alt="BMW">
+                    <h2>BMW</h2>
+                    <p>Ідеальний автомобіль для сімейних поїздок.</p>
+                    <div class="car-details">
+                        <h3>BMW</h3>
+                        <div class="car-info">
+                            <span class="car-year">2023</span>
+                            <span class="car-price">$50,000</span>
+                        </div>
+                        <div class="car-location">
+                            📍 Одеса, Україна
+                        </div>
+                        <button class="details-btn">Детальніше</button>
+                    </div>
+                </div>
+                
+                <div class="car-card" data-car-id="3">
+                    <img src="img_cars/mers.jpg" alt="Mersedes">
+                    <h2>Mersedes</h2>
+                    <p>Спортивний автомобіль з чудовою динамікою.</p>
+                    <div class="car-details">
+                        <h3>Mersedes</h3>
+                        <div class="car-info">
+                            <span class="car-year">2023</span>
+                            <span class="car-price">$90,000</span>
+                        </div>
+                        <div class="car-location">
+                            📍 Харків, Україна
+                        </div>
+                        <button class="details-btn">Детальніше</button>
+                    </div>
+                </div>
+                
+                <div class="car-card" data-car-id="4">
+                    <img src="img_cars/corolla.jpg" alt="Toyota Corolla">
+                    <h2>Toyota Corolla</h2>
+                    <p>Надійний та економічний компактний автомобіль, ідеальний для міста.</p>
+                    <div class="car-details">
+                        <h3>Toyota Corolla</h3>
+                        <div class="car-info">
+                            <span class="car-year">2023</span>
+                            <span class="car-price">$18,000</span>
+                        </div>
+                        <div class="car-location">
+                            📍 Львів, Україна
+                        </div>
+                        <button class="details-btn">Детальніше</button>
+                    </div>
+                </div>
+                
+                <div class="car-card" data-car-id="5">
+                    <img src="img_cars/sivic.jpg" alt="Honda Civic">
+                    <h2>Honda Civic</h2>
+                    <p>Стильний дизайн та високий рівень паливної ефективності.</p>
+                    <div class="car-details">
+                        <h3>Honda Civic</h3>
+                        <div class="car-info">
+                            <span class="car-year">2023</span>
+                            <span class="car-price">$25,000</span>
+                        </div>
+                        <div class="car-location">
+                            📍 Одеса, Україна
+                        </div>
+                        <button class="details-btn">Детальніше</button>
+                    </div>
+                </div>
+                
+                <div class="car-card" data-car-id="6">
+                    <img src="img_cars/Ford_Mustang.jpg" alt="Ford Mustang">
+                    <h2>Ford Mustang</h2>
+                    <p>Ікона американського автопрому, відома своєю потужністю та стилем.</p>
+                    <div class="car-details">
+                        <h3>Ford Mustang</h3>
+                        <div class="car-info">
+                            <span class="car-year">2023</span>
+                            <span class="car-price">$40,000</span>
+                        </div>
+                        <div class="car-location">
+                            📍 Харків, Україна
+                        </div>
+                        <button class="details-btn">Детальніше</button>
+                    </div>
+                </div>
+                
+                <div class="car-card" data-car-id="7">
+                    <img src="img_cars/Chevrolet_Camaro.jpg" alt="Chevrolet Camaro">
+                    <h2>Chevrolet Camaro</h2>
+                    <p>Спортивний автомобіль з агресивним дизайном та високою продуктивністю.</p>
+                    <div class="car-details">
+                        <h3>Chevrolet Camaro</h3>
+                        <div class="car-info">
+                            <span class="car-year">2023</span>
+                            <span class="car-price">$55,000</span>
+                        </div>
+                        <div class="car-location">
+                            📍 Львів, Україна
+                        </div>
+                        <button class="details-btn">Детальніше</button>
+                    </div>
+                </div>
+                
+                <div class="car-card" data-car-id="8">
+                    <img src="img_cars/BMW_3 _Series.jpg" alt="BMW 3 Series">
+                    <h2>BMW 3 Series</h2>
+                    <p>Преміум седан з комфортом та передовими технологіями.</p>
+                    <div class="car-details">
+                        <h3>BMW 3 Series</h3>
+                        <div class="car-info">
+                            <span class="car-year">2023</span>
+                            <span class="car-price">$45,000</span>
+                        </div>
+                        <div class="car-location">
+                            📍 Одеса, Україна
+                        </div>
+                        <button class="details-btn">Детальніше</button>
+                    </div>
+                </div>
+                
+                <div class="car-card" data-car-id="9">
+                    <img src="img_cars/Audi_A4.jpg" alt="Audi A4">
+                    <h2>Audi A4</h2>
+                    <p>Елегантний дизайн та інноваційні функції для комфортної поїздки.</p>
+                    <div class="car-details">
+                        <h3>Audi A4</h3>
+                        <div class="car-info">
+                            <span class="car-year">2023</span>
+                            <span class="car-price">$37,000</span>
+                        </div>
+                        <div class="car-location">
+                            📍 Харків, Україна
+                        </div>
+                        <button class="details-btn">Детальніше</button>
+                    </div>
+                </div>
+                
+                <div class="car-card" data-car-id="10">
+                    <img src="img_cars/Mercedes-Benz_C-Class.jpg" alt="Mercedes-Benz C-Class">
+                    <h2>Mercedes-Benz C-Class</h2>
+                    <p>Розкішний інтер'єр та високі стандарти безпеки.</p>
+                    <div class="car-details">
+                        <h3>Mercedes-Benz C-Class</h3>
+                        <div class="car-info">
+                            <span class="car-year">2023</span>
+                            <span class="car-price">$55,000</span>
+                        </div>
+                        <div class="car-location">
+                            📍 Львів, Україна
+                        </div>
+                        <button class="details-btn">Детальніше</button>
+                    </div>
+                </div>
+                
+                <div class="car-card" data-car-id="11">
+                    <img src="img_cars/Tesla_Model_S.jpg" alt="Tesla Model S">
+                    <h2>Tesla Model S</h2>
+                    <p>Передовий електромобіль з довгим запасом ходу та швидким прискоренням.</p>
+                    <div class="car-details">
+                        <h3>Tesla Model S</h3>
+                        <div class="car-info">
+                            <span class="car-year">2023</span>
+                            <span class="car-price">$75,000</span>
+                        </div>
+                        <div class="car-location">
+                            📍 Одеса, Україна
+                        </div>
+                        <button class="details-btn">Детальніше</button>
+                    </div>
+                </div>
+                
+                <div class="car-card" data-car-id="12">
+                    <img src="img_cars/Volkswagen_Golf.jpg" alt="Volkswagen Golf">
+                    <h2>Volkswagen Golf</h2>
+                    <p>Компактний хетчбек з зручним інтер'єром та хорошою керованістю.</p>
+                    <div class="car-details">
+                        <h3>Volkswagen Golf</h3>
+                        <div class="car-info">
+                            <span class="car-year">2023</span>
+                            <span class="car-price">$20,000</span>
+                        </div>
+                        <div class="car-location">
+                            📍 Харків, Україна
+                        </div>
+                        <button class="details-btn">Детальніше</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

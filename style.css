@@ -1,0 +1,726 @@
+/* Загальні стилі */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    display: flex;
+}
+
+/* Стилі бічного меню */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #fff;
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.sidebar.active {
+    transform: translateX(0);
+}
+
+.sidebar-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.sidebar-nav {
+    padding: 20px 0;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.nav-item:hover {
+    background-color: #f5f5f5;
+}
+
+.nav-item.active {
+    background-color: #e9ecef;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+/* Основний контент */
+.main-content {
+    flex: 1;
+    margin-left: 0;
+    transition: margin-left 0.3s ease;
+    width: 100%;
+}
+
+.main-content.sidebar-active {
+    margin-left: 250px;
+}
+
+/* Шапка */
+.header {
+    background-color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Оновлені стилі для меню */
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.menu-toggle.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Стилі для кнопки закриття меню */
+#closeSidebar {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: #f5f5f5;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+#closeSidebar:hover {
+    background-color: #e0e0e0;
+}
+
+/* Оновлені стилі для кнопок входу/реєстрації */
+.auth-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.sign-in, .sign-up {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.sign-in {
+    background-color: transparent;
+    color: #1a1a1a;
+    border: 1px solid #1a1a1a;
+}
+
+.sign-in:hover {
+    background-color: #f5f5f5;
+}
+
+.sign-up {
+    background-color: #1a1a1a;
+    color: white;
+    border: 1px solid #1a1a1a;
+}
+
+.sign-up:hover {
+    background-color: #333;
+}
+
+/* Оновлені стилі для бічного меню */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #fff;
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+/* Стилі для пунктів меню */
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border-radius: 8px;
+    margin: 4px 8px;
+}
+
+.nav-item:hover {
+    background-color: #f5f5f5;
+}
+
+.nav-item.active {
+    background-color: #e9ecef;
+    font-weight: 500;
+}
+
+.icon {
+    margin-right: 12px;
+    width: 20px;
+    text-align: center;
+}
+
+/* Секція пошуку */
+.search-section {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.search-bar {
+    display: flex;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px 0 0 8px;
+    font-size: 1rem;
+}
+
+.search-button {
+    padding: 12px 24px;
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+}
+
+/* Фільтри */
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.filter-select {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: white;
+}
+
+/* Сітка автомобілів */
+.car-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.car-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.car-card:hover {
+    transform: translateY(-5px);
+}
+
+.car-image-container {
+    position: relative;
+}
+
+.car-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.featured-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.favorite-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.car-card:hover .favorite-btn {
+    opacity: 1;
+}
+
+.car-details {
+    padding: 15px;
+}
+
+.car-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.details-btn {
+    padding: 8px;
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Адаптивний дизайн */
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+    
+    .car-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+.car-card-container {
+    display: flex; /* Align items in a row */
+    justify-content: space-between; /* Distribute cards with space between them */
+}}
+
+.car-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Creates a responsive grid */
+    gap: 20px; /* Adds space between the cards */
+}
+
+.car-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.car-image-container {
+    width: 100%;
+    height: 200px; /* Fixed height for image container */
+    overflow: hidden;
+}
+
+.car-image {
+    width: 100%; /* Makes the image fill the container width */
+    height: 200px; /* Fixed height for the image */
+    object-fit: cover; /* Ensures the image covers the area without stretching */
+}
+
+.car-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+    flex-grow: 1;
+}
+
+.car-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.car-year,
+.car-price {
+    font-size: 14px;
+    color: #555;
+}
+
+.car-location {
+    font-size: 14px;
+    color: #777;
+}
+
+.details-btn {
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+
+
+.favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    color: #f00;
+    cursor: pointer;
+}
+
+.favorite-btn:hover {
+    color: #c00;
+}
+
+/* Додаємо стилі для темної теми */
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --card-bg: #2d2d2d;
+    --header-bg: #2d2d2d;
+    --border-color: #444;
+}
+
+[data-theme="light"] {
+    --bg-color: #f8f9fa;
+    --text-color: #1a1a1a;
+    --card-bg: #ffffff;
+    --header-bg: #ffffff;
+    --border-color: #ddd;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.header {
+    background-color: var(--header-bg);
+}
+
+.car-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    animation: появаКартки 0.5s ease-out;
+}
+
+/* Додаємо анімацію появи */
+@keyframes появаКартки {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Стилі кнопки зміни теми */
+.theme-toggle {
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: none;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    cursor: pointer;
+    margin-right: 15px;
+}
+/* Загальні стилі */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.video-section {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.video-section h2 {
+    margin-bottom: 10px;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+/* Сайдбар */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.nav-item {
+    padding: 15px 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.nav-item:hover {
+    background-color: #575757;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+
+button#closeSidebar {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+}
+
+/* Основний контент */
+main {
+    margin-left: 250px;
+    padding: 40px;
+    background-color: #fff;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+
+.intro-text, .section-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 2rem;
+    color: #333;
+    margin-top: 30px;
+}
+
+.advantages-list, .process-list {
+    padding-left: 20px;
+}
+
+.advantages-item, .process-item {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+/* Футер */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Стилізація для мобільних пристроїв */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+    
+    main {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .nav-item {
+        font-size: 1rem;
+    }
+
+    .advantages-item, .process-item {
+        font-size: 1rem;
+    }
+}
+
+/* Загальні стилі для тіла сторінки */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Модальне вікно */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Напівпрозорий фон */
+    z-index: 1000; /* Забезпечує, що модальне вікно буде поверх інших елементів */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Вміст модального вікна */
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: slideIn 0.3sease-out;
+}
+
+/* Кнопка для закриття */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Заголовок */
+h2 {
+    margin-bottom: 20px;
+}
+
+/* Форми та поля вводу */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Посилання для входу */
+.register-link {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
+
+/* Адаптивні стилі */
+@media screen and (max-width: 768px) {
+    .modal-content {
+        width: 90%;
+    }
+}
